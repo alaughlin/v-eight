@@ -5,7 +5,6 @@ import rand
 struct OpcodeResults {
 mut:
 	clear_screen bool
-	draw_screen bool
 	play_sound bool
 }
 
@@ -34,7 +33,6 @@ fn initialize_cpu() &CPU {
 
 pub fn (mut cpu CPU) process_opcode(opcode u16, mut ram RAM, mut window Window, mut input Input) OpcodeResults {
 	mut clear_screen := false
-	mut draw_screen := false
 	mut play_sound := false
 
 	n := byte(opcode & 0x000F)
@@ -164,7 +162,6 @@ pub fn (mut cpu CPU) process_opcode(opcode u16, mut ram RAM, mut window Window, 
 					window.vram[row][col] ^= color
             	}
 			}
-			draw_screen = true
 			cpu.pc += 2
 		}
 		0xE {
@@ -255,7 +252,6 @@ pub fn (mut cpu CPU) process_opcode(opcode u16, mut ram RAM, mut window Window, 
 
 	return OpcodeResults{
 		clear_screen: clear_screen
-		draw_screen: draw_screen
 		play_sound: play_sound
 	}
 }

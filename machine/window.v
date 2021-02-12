@@ -33,7 +33,6 @@ fn (mut window Window) clear() {
 			init: 0
 		}
 	}
-	window.draw()
 }
 
 fn initialize_window() &Window {
@@ -50,6 +49,7 @@ fn initialize_window() &Window {
 			create_window: true
 			window_title: 'CHIP-8'
 			event_fn: on_event
+			frame_fn: frame
 		})
 		vram: [][]byte{
 			len: height,
@@ -65,6 +65,12 @@ fn initialize_window() &Window {
 	}
 
 	return window
+}
+
+fn frame(mut window Window) {
+	window.context.begin()
+	window.draw()
+	window.context.end()
 }
 
 fn on_event(e &sapp.Event, mut window Window) {

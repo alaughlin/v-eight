@@ -37,11 +37,11 @@ fn (mut machine Machine) game_loop() {
 			machine.window.clear()
 		}
 
-		if results.draw_screen {
-			machine.window.draw()
+		if results.play_sound {
+			// TODO
 		}
 
-		// TODO: figure out better way to get constant framerate
+		// TODO figure out better way to get constant framerate
 		time.sleep_ms(16)
 	}
 }
