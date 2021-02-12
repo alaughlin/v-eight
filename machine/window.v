@@ -41,16 +41,7 @@ fn initialize_window() &Window {
 	scale_factor := 10
 
 	mut window := &Window{
-		context: gg.new_context({
-			bg_color: gx.black
-			width: width * scale_factor
-			height: height * scale_factor
-			use_ortho: true
-			create_window: true
-			window_title: 'CHIP-8'
-			event_fn: on_event
-			frame_fn: frame
-		})
+		context: 0
 		vram: [][]byte{
 			len: height,
 			init: []byte{
@@ -61,8 +52,19 @@ fn initialize_window() &Window {
 		width: width
 		height: height
 		scale_factor: scale_factor
-
 	}
+
+	window.context = gg.new_context({
+		bg_color: gx.black
+		width: width * scale_factor
+		height: height * scale_factor
+		use_ortho: true
+		create_window: true
+		window_title: 'CHIP-8'
+		event_fn: on_event
+		frame_fn: frame
+		user_data: window
+	})
 
 	return window
 }
